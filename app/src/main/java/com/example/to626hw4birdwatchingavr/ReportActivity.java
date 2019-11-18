@@ -8,11 +8,15 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class ReportActivity extends AppCompatActivity {
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+public class ReportActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button buttonSubmit;
     EditText editTextbirdname, editTextzipcode, editTextpersonname;
@@ -25,11 +29,31 @@ public class ReportActivity extends AppCompatActivity {
         buttonSubmit = findViewById(R.id.buttonSubmit);
 
         editTextbirdname = findViewById(R.id.editTextbirdname);
-        editTextzipcode = findViewById(R.id.editTextpersonname);
+        editTextzipcode = findViewById(R.id.editTextzipcode);
         editTextpersonname = findViewById(R.id.editTextpersonname);
+
+        buttonSubmit.setOnClickListener(this);
     }
 
+    @Override
+    public void onClick(View view) {
 
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference myRef = database.getReference("Birdsightings");
+
+        if (view == buttonSubmit){
+
+            String createBirdname = editTextbirdname.getText().toString();
+            String createZipcode = editTextzipcode.getText().toString();
+            String createPersonName = editTextpersonname.getText().toString();
+
+            Birdsighting createBirdsighting = new Birdsighting(createBirdname, createZipcode, createPersonName);
+
+            myRef.push().setValue(createBirdsighting);
+        } else {
+
+        }
+    }
 
     //Code to bring in menu file to report activity page
     @Override
@@ -54,4 +78,5 @@ public class ReportActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
