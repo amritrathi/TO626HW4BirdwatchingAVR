@@ -5,7 +5,7 @@ public class Birdsighting {
     public String createZipcode;
     public String createPersonName;
 
-    public Birdsighting() {
+    public Birdsighting(String createBirdname, Integer createZipcode, String createPersonName) {
     }
 
     public Birdsighting(String createBirdname, String createZipcode, String createPersonName) {

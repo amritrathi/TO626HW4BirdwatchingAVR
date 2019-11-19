@@ -41,18 +41,19 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference myRef = database.getReference("Birdsightings");
 
-        if (view == buttonSubmit){
+        if (view == buttonSubmit) {
 
             String createBirdname = editTextbirdname.getText().toString();
             String createZipcode = editTextzipcode.getText().toString();
             String createPersonName = editTextpersonname.getText().toString();
 
-            Birdsighting createBirdsighting = new Birdsighting(createBirdname, createZipcode, createPersonName);
 
+            Birdsighting createBirdsighting = new Birdsighting(createBirdname, createZipcode, createPersonName);
             myRef.push().setValue(createBirdsighting);
-        } else {
+            } else {
 
         }
+
     }
 
     //Code to bring in menu file to report activity page
